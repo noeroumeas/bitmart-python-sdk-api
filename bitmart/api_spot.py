@@ -297,11 +297,11 @@ class APISpot(CloudClient):
         }
         return self._request_with_params(POST, API_SPOT_CANCEL_ORDER_URL, param, Auth.SIGNED)
 
-    def post_cancel_orders(self, symbol=None, side=None):
+    def post_cancel_all_orders(self, symbol=None, side=None):
         """
         Cancel all outstanding orders in the specified side for a trading pair
 
-        POST https://api-cloud.bitmart.com/spot/v1/cancel_orders
+        POST https://api-cloud.bitmart.com/spot/v1/cancel_all
 
         :param symbol: Trading pair (e.g. BTC_USDT)
         :param side: Order side -buy -sell
@@ -315,6 +315,34 @@ class APISpot(CloudClient):
 
         if side:
             param['side'] = side
+
+        return self._request_with_params(POST, API_SPOT_CANCEL_ALL_ORDERS_URL, param, Auth.SIGNED)
+    
+    def post_cancel_orders(self, symbol: str, orderIds: list=None, clientOrderIds: list=None, recvWindow: int=None):
+        """
+        Cancel all outstanding orders in the specified side for a trading pair
+
+        POST https://api-cloud.bitmart.com/spot/v4/cancel_orders
+
+        :param symbol: Trading pair (e.g. BTC_USDT)
+        :param orderIds: Order Id List (Either orderIds or clientOrderIds must be provided)
+        :param clientOrderIds: Client-defined OrderId List (Either orderIds or clientOrderIds must be provided)
+        :param recvWindow: Trade time limit, allowed range (0,60000], default: 5000 milliseconds
+        :return:
+        """
+
+        param = {
+            'symbol': symbol
+        }
+
+        if orderIds:
+            param['orderIds'] = orderIds
+
+        if clientOrderIds:
+            param['clientOrderIds'] = clientOrderIds
+
+        if recvWindow:
+            param['recvWindow'] = recvWindow
 
         return self._request_with_params(POST, API_SPOT_CANCEL_ORDERS_URL, param, Auth.SIGNED)
 
