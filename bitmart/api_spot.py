@@ -92,18 +92,6 @@ class APISpot(CloudClient):
         """
         return self._request_with_params(GET, API_SPOT_V3_TICKER_URL, {'symbol': symbol})
 
-    def get_steps(self):
-        """
-        Get all k-line steps supported by the platform, expressed in minutes, minimum 1 minute.
-
-        GET https://api-cloud.bitmart.com/spot/v1/steps
-        :return:
-        """
-        warnings.warn("This function will be removed soon, "
-                      "k-line step, value [1, 3, 5, 15, 30, 45, 60, 120, "
-                      "180, 240, 1440, 10080, 43200]", DeprecationWarning)
-        return self._request_without_params(GET, API_SPOT_STEPS_URL)
-
     def get_v3_latest_kline(self, symbol: str, before=None, after=None, step=None, limit=None):
         """
         Query the latest K-line and return a maximum of 1000 data.
