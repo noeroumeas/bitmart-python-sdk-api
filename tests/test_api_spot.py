@@ -90,10 +90,13 @@ def test_post_cancel_all_orders():
     assert spotAPI.post_cancel_all_orders(symbol='BTC_USDT', side='buy')[0]['code'] == 1000
     assert spotAPI.post_cancel_all_orders()[0]['code'] == 1000
 
-def test_post_cancel_orders():
+def test_post_cancel_orders_by_client_order_ids():
     """Test POST https://api-cloud.bitmart.com/spot/v4/cancel_orders"""
-    assert spotAPI.post_cancel_orders(symbol='BTC_USDT', orderIds=["5e925f3981"], recvWindow=5000)[0]['code'] == 1000
-    assert spotAPI.post_cancel_orders(symbol='BTC_USDT', clientOrderIds=["5e925f3981"])[0]['code'] == 1000
+    assert spotAPI.post_cancel_orders_by_client_order_ids(symbol='BTC_USDT', clientOrderIds=["5e925f3981"])[0]['code'] == 1000
+
+def test_post_cancel_orders_by_order_ids():
+    """Test POST https://api-cloud.bitmart.com/spot/v4/cancel_orders"""
+    assert spotAPI.post_cancel_orders_by_order_ids(symbol='BTC_USDT', orderIds=["5e925f3981"], recvWindow=5000)[0]['code'] == 1000
 
 
 def test_v4_query_order_by_id():

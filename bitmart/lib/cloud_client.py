@@ -31,7 +31,7 @@ class CloudClient(object):
             url = self.URL + request_path
 
         # set body
-        body = json.dumps(params) if method == c.POST else ""
+        body = str(json.dumps(params, separators=(',', ':'))) if method == c.POST else ""
 
         # set header
         if auth == Auth.NONE:
@@ -40,9 +40,9 @@ class CloudClient(object):
             header = cloud_utils.get_header(self.API_KEY, sign=None, timestamp=None)
         else:
             timestamp = cloud_utils.get_timestamp()
-            sign = cloud_utils.sign(cloud_utils.pre_substring(timestamp, self.MEMO, str(body)), self.SECRET_KEY)
+            sign = cloud_utils.sign(cloud_utils.pre_substring(timestamp, self.MEMO, body), self.SECRET_KEY)
+            print("pre_str :", cloud_utils.pre_substring(timestamp, self.MEMO, body))
             header = cloud_utils.get_header(self.API_KEY, sign, timestamp)
-
         if CloudLog.is_debug():
             print("------------------------------------------")
             print("[", method, "]", url)

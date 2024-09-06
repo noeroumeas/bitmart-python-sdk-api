@@ -318,7 +318,29 @@ class APISpot(CloudClient):
 
         return self._request_with_params(POST, API_SPOT_CANCEL_ALL_ORDERS_URL, param, Auth.SIGNED)
     
-    def post_cancel_orders(self, symbol: str, orderIds: list=None, clientOrderIds: list=None, recvWindow: int=None):
+    def post_cancel_orders_by_client_order_ids(self, symbol: str, clientOrderIds: list, recvWindow: int=None):
+        """
+        Cancel all outstanding orders in the specified side for a trading pair
+
+        POST https://api-cloud.bitmart.com/spot/v4/cancel_orders
+
+        :param symbol: Trading pair (e.g. BTC_USDT)
+        :param clientOrderIds: Client-defined OrderId List (Either orderIds or clientOrderIds must be provided)
+        :param recvWindow: Trade time limit, allowed range (0,60000], default: 5000 milliseconds
+        :return:
+        """
+
+        param = {
+            'symbol': symbol,
+            'clientOrderIds': clientOrderIds
+        }
+
+        if recvWindow:
+            param['recvWindow'] = recvWindow
+
+        return self._request_with_params(POST, API_SPOT_CANCEL_ORDERS_URL, param, Auth.SIGNED)
+    
+    def post_cancel_orders_by_order_ids(self, symbol: str, orderIds: list, recvWindow: int=None):
         """
         Cancel all outstanding orders in the specified side for a trading pair
 
@@ -326,20 +348,14 @@ class APISpot(CloudClient):
 
         :param symbol: Trading pair (e.g. BTC_USDT)
         :param orderIds: Order Id List (Either orderIds or clientOrderIds must be provided)
-        :param clientOrderIds: Client-defined OrderId List (Either orderIds or clientOrderIds must be provided)
         :param recvWindow: Trade time limit, allowed range (0,60000], default: 5000 milliseconds
         :return:
         """
 
         param = {
-            'symbol': symbol
+            'symbol': symbol,
+            'orderIds': orderIds
         }
-
-        if orderIds:
-            param['orderIds'] = orderIds
-
-        if clientOrderIds:
-            param['clientOrderIds'] = clientOrderIds
 
         if recvWindow:
             param['recvWindow'] = recvWindow

@@ -2,9 +2,10 @@ import hmac
 import datetime
 from bitmart.__version__ import __version__
 from bitmart.lib import cloud_consts as c
-
+import hashlib
 
 def sign(message, secret_key):
+    return hmac.new(secret_key.encode(), message.encode(), hashlib.sha256).hexdigest()
     mac = hmac.new(bytes(secret_key, encoding='utf8'), bytes(message, encoding='utf-8'), digestmod='sha256')
     return mac.hexdigest()
 
