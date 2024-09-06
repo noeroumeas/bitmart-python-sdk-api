@@ -246,25 +246,6 @@ class APISpot(CloudClient):
 
         return self._request_with_params(GET, API_SPOT_V3_BOOKS_URL, param)
 
-    def get_symbol_trades(self, symbol: str, N: int = 50):
-        """
-        Get the latest trade records of the specified trading pair
-
-        GET https://api-cloud.bitmart.com/spot/v1/symbols/trades
-
-        :param symbol: Trading pair (e.g. BMX_USDT)
-        :param N: Number of returned items, the default maximum is 50
-        :return:
-        """
-        param = {
-            'symbol': symbol,
-            'N': N
-        }
-        warnings.warn("This function will be removed soon, "
-                      "please use the alternative function `get_v3_trades()`",
-                      DeprecationWarning)
-        return self._request_with_params(GET, API_SPOT_SYMBOLS_TRADES_URL, param)
-
     def get_v3_trades(self, symbol: str, limit=None):
         """
         Get the latest trade records of the specified trading pair.

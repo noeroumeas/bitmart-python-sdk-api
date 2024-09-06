@@ -56,7 +56,7 @@ def test_get_v3_depth():
 
 
 def test_get_v3_trades():
-    """Test GET https://api-cloud.bitmart.com/spot/v1/symbols/trades"""
+    """Test GET https://api-cloud.bitmart.com/spot/quotation/v3/trades"""
     assert spotAPI.get_v3_trades(symbol='BTC_USDT', limit=1)[0]['code'] == 1000
 
 
