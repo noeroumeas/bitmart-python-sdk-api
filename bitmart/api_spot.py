@@ -104,29 +104,6 @@ class APISpot(CloudClient):
                       "180, 240, 1440, 10080, 43200]", DeprecationWarning)
         return self._request_without_params(GET, API_SPOT_STEPS_URL)
 
-    def get_symbol_kline(self, symbol: str, from_time: int, to_time: int, step: int = 1):
-        """
-        Get k-line data within a specified time range of a specified trading pair
-
-        GET https://api-cloud.bitmart.com/spot/v1/symbols/kline
-
-        :param symbol: Trading pair (e.g. BMX_USDT)
-        :param from_time: Start timestamp (in seconds, UTC+0 TimeZome)
-        :param to_time: End timestamp (in seconds, UTC+0 TimeZome)
-        :param step: k-line step Steps (in minutes, default 1 minute)
-        :return:
-        """
-        param = {
-            'symbol': symbol,
-            'from': from_time,
-            'to': to_time,
-            'step': step
-        }
-        warnings.warn("This function will be removed soon, "
-                      "please use the alternative function "
-                      "`get_v3_latest_kline() or get_v3_history_kline()`", DeprecationWarning)
-        return self._request_with_params(GET, API_SPOT_SYMBOLS_KLINE_URL, param)
-
     def get_v3_latest_kline(self, symbol: str, before=None, after=None, step=None, limit=None):
         """
         Query the latest K-line and return a maximum of 1000 data.
