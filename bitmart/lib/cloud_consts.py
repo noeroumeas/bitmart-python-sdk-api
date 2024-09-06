@@ -54,7 +54,7 @@ API_SPOT_V3_TRADES_URL = '/spot/quotation/v3/trades'
 API_SPOT_WALLET_URL = '/spot/v1/wallet'
 API_SPOT_SUBMIT_ORDER_URL = '/spot/v2/submit_order'
 API_SPOT_MARGIN_ORDER_URL = '/spot/v1/margin/submit_order'
-API_SPOT_SUBMIT_BATCH_ORDERS_URL = '/spot/v2/batch_orders'
+API_SPOT_SUBMIT_BATCH_ORDERS_URL = '/spot/v4/batch_orders'
 API_SPOT_CANCEL_ORDER_URL = '/spot/v3/cancel_order'
 API_SPOT_CANCEL_ORDERS_URL = '/spot/v1/cancel_orders'
 
