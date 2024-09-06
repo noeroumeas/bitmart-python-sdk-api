@@ -46,17 +46,6 @@ class APISpot(CloudClient):
         """
         return self._request_without_params(GET, API_SPOT_SYMBOLS_DETAILS_URL)
 
-    def get_ticker(self):
-        """
-        Applicable to query the latest ticker of all trading pairs, please note that the endpoint returns more data, please reduce the frequency of calls
-
-        GET https://api-cloud.bitmart.com/spot/v2/ticker
-        :return:
-        """
-        warnings.warn("This function will be removed soon, "
-                      "please use the alternative function `get_v3_tickers()`", DeprecationWarning)
-        return self._request_without_params(GET, API_SPOT_TICKER_URL)
-
     def get_v3_tickers(self):
         """
         Get the quotations of all trading pairs, including: snapshot information of the latest transaction price, first bid price, first ask price and 24-hour trading volume.

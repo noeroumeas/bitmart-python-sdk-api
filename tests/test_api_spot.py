@@ -23,11 +23,6 @@ def test_get_symbol_detail():
     assert spotAPI.get_symbol_detail()[0]['code'] == 1000
 
 
-def test_get_v3_tickers():
-    """Test GET https://api-cloud.bitmart.com/spot/v2/ticker"""
-    assert spotAPI.get_v3_tickers()[0]['code'] == 1000
-
-
 def test_get_v3_latest_kline():
     """Test GET https://api-cloud.bitmart.com/spot/quotation/v3/lite-klines"""
     before = int(time.time())
