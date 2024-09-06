@@ -67,18 +67,6 @@ class APISpot(CloudClient):
         """
         return self._request_without_params(GET, API_SPOT_V3_TICKERS_URL)
 
-    def get_symbol_ticker(self, symbol: str):
-        """
-        Applicable for querying aggregated tickers of a particular trading pair
-
-        GET https://api-cloud.bitmart.com/spot/v1/ticker_detail
-        :param symbol: Trading pair (e.g. BMX_USDT)
-        :return:
-        """
-        warnings.warn("This function will be removed soon, "
-                      "please use the alternative function `get_v3_ticker(symbol)`", DeprecationWarning)
-        return self._request_with_params(GET, API_SPOT_TICKER_DETAIL_URL, {'symbol': symbol})
-
     def get_v3_ticker(self, symbol: str):
         """
         Applicable to query the aggregated market price of a certain trading pair,
