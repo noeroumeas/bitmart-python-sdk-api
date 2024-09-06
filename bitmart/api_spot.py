@@ -195,20 +195,20 @@ class APISpot(CloudClient):
         """
         return self._request_without_params(GET, API_SPOT_WALLET_URL, Auth.KEYED)
 
-    def post_batch_orders(self, symbol: str, order_params: list, recvWindow: int = 5000):
+    def post_batch_orders(self, symbol: str, orderParams: list, recvWindow: int = 5000):
         """
         Batch order
 
         POST https://api-cloud.bitmart.com/spot/v4/batch_orders
 
         :param symbol: Trading pair (e.g. BTC_USDT)
-        :param order_params: Order parameters, the number of transactions cannot exceed 10
-        :param order_params: Trade time limit, allowed range (0,60000], default: 5000 milliseconds
+        :param orderParams: Order parameters, the number of transactions cannot exceed 10
+        :param recvWindow: Trade time limit, allowed range (0,60000], default: 5000 milliseconds
         :return:
         """
         param = {
             'symbol': symbol,
-            'order_params': order_params,
+            'orderParams': orderParams,
             'recvWindow': recvWindow
         }
         return self._request_with_params(POST, API_SPOT_SUBMIT_BATCH_ORDERS_URL, param, Auth.SIGNED)
