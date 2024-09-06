@@ -197,31 +197,6 @@ class APISpot(CloudClient):
 
         return self._request_with_params(GET, API_SPOT_V3_HISTORY_KLINE_URL, param)
 
-    def get_symbol_book(self, symbol: str, precision: int, size: int):
-        """
-        Get full depth of trading pairs.
-
-        GET https://api-cloud.bitmart.com/spot/v1/symbols/book
-
-        :param symbol: Trading pair (e.g. BMX_USDT)
-        :param precision: Price precision, the range is defined in trading pair details
-        :param size: Number of results per request. The value can be transmitted [1-50], there are altogether [2-100] buying and selling depths
-        :return:
-        """
-        param = {
-            'symbol': symbol
-        }
-
-        if precision:
-            param['precision'] = precision
-
-        if size:
-            param['size'] = size
-        warnings.warn("This function will be removed soon, "
-                      "please use the alternative function `get_v3_depth()`",
-                      DeprecationWarning)
-        return self._request_with_params(GET, API_SPOT_SYMBOLS_BOOK_URL, param)
-
     def get_v3_depth(self, symbol: str, limit=None):
         """
         Get full depth of trading pairs.
